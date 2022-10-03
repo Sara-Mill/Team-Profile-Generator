@@ -68,7 +68,7 @@ const addManager = () => {
 var stringTeam = JSON.stringify(teamArray)
 console.log(stringTeam)
 const writeFile = HTML => {
-    fs.writeFile("./dist/index/html", stringTeam, err => {
+    fs.writeFile("./dist/index.html", stringTeam, err => {
         if(err) {
             console.log(err);
             return;
