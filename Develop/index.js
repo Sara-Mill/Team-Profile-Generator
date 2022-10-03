@@ -68,14 +68,14 @@ const addManager = () => {
 var stringTeam = JSON.stringify(teamArray)
 console.log(stringTeam)
 const writeFile = HTML => {
-    fs.writeFile("./dist/index.html", stringTeam, err => {
+    fs.writeFile("./dist/index/html", stringTeam, err => {
         if(err) {
             console.log(err);
             return;
         } else {
             console.log(teamArray);
             console.log("Your team profile has been successfully created!")
-            //console.log(fs.readFileSync("index.html", "UTF8"));
+            console.log(fs.readFileSync("Employee.HTML", "UTF8"));
         }
     })
 };
