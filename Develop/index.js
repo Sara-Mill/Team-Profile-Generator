@@ -61,20 +61,23 @@ const addManager = () => {
         const manager = new Manager (name, id, email, officeNumber);
 
         teamArray.push(manager);
+        writeFile()
         console.log(manager);
     })
 }
-
-const writeFile = generateHTML => {
-    fs.writeFile("PAGE", generateHTML, err => {
+var stringTeam = JSON.stringify(teamArray)
+console.log(stringTeam)
+const writeFile = HTML => {
+    fs.writeFile("./dist/index.html", stringTeam, err => {
         if(err) {
             console.log(err);
             return;
         } else {
+            console.log(teamArray);
             console.log("Your team profile has been successfully created!")
-            console.log(fs.readFileSync("Employee.HTML", "UTF8"));
+            //console.log(fs.readFileSync("index.html", "UTF8"));
         }
     })
 };
-writeFile
+
 addManager()
