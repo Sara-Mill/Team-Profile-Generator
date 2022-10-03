@@ -45,96 +45,134 @@ function runApp () {
             }
         })
     }
-//Manager prompts
-function addManager() {
-    inquirer.prompt ([
-        {
-            type: 'input',
-            name: 'name',
-            message: 'Who is the manager of this team?',
-            validate: nameInput => {
-                if(nameInput) {
-                    return true;
-                } else {
-                    console.log ("Please enter the manager's name!");
-                    return false;
+    //Manager prompts
+    function addManager() {
+        inquirer.prompt ([
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Who is the manager of this team?',
+                validate: nameInput => {
+                    if(nameInput) {
+                        return true;
+                    } else {
+                        console.log ("Please enter the manager's name!");
+                        return false;
+                    }
                 }
-            }
-        },
-        {
-            type: 'input',
-            name: 'id',
-            message: "Please enter the manager's ID.",
-            validate: nameInput => {
-                if (isNaN(nameInput)) {
-                    console.log ("Please enter the manager's ID")
-                    return false;
-                } else {
-                    return true;
+            },
+            
+            {
+                type: 'input',
+                name: 'id',
+                message: "Please enter the manager's ID.",
+                validate: nameInput => {
+                    if (isNaN(nameInput)) {
+                        console.log ("Please enter the manager's ID")
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
-            }
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: "Please enter the manager's email.",
-            validates: email => {
-                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-                if (valid) {
-                    return true;
-                } else {
-                    console.log ("please enter an email")
-                    return false;
+            },
+
+            {
+                type: 'input',
+                name: 'email',
+                message: "Please enter the manager's email.",
+                validates: email => {
+                    valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                    if (valid) {
+                        return true;
+                    } else {
+                        console.log ("please enter an email")
+                        return false;
+                    }
                 }
+            },
+
+            {
+                type: 'input',
+                name: 'officeNumber',
+                message: "Please enter the manager's office number",
             }
-        },
+
+        ]).then(answers => {
+            const manager = new Manager (answers.name, answers.id, answers.email, answers.officeNumber);
+            teamArray.push(manager);
+            createTeam();
+        });
+    }
+
+    function addEngineer() {
+        inquirer.prompt([
+        
         {
-            type: 'input',
-            name: 'officeNumber',
-            message: "Please enter the manager's office number",
+            type: "input",
+            name: "name",
+            message: "What is the engineer's name?"
+        },
+
+        {
+            type: "input",
+            name: "id",
+            message: "What is the engineer's employee ID number?" 
+        },
+
+        {
+            type: "input",
+            name: "email",
+            message: "What is the engineer's email address?"
+        },
+
+        {
+            type: "input",
+            name: "github",
+            message: "What is the engineer's GitHub username?"
         }
-    ]).then(answers => {
-        const manager = new Manager (answers.name, answers.id, answers.email, answers.officeNumber);
-        teamArray.push(manager);
+
+        ]).then(answers => {
+        const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+        teamArray.push(engineer);
         createTeam();
-    });
-}
+        });
 
-function addEngineer() {
-    inquirer.prompt([
-      
-      {
-        type: "input",
-        name: "name",
-        message: "What is the engineer's name?"
-      },
+    }
 
-      {
-        type: "input",
-        name: "id",
-        message: "What is the engineer's employee ID number?" 
-      },
+    function addIntern() {
+        inquirer.prompt([
+        
+        {
+            type: "input",
+            name: "name",
+            message: "What is the intern's name?"
+        },
 
-      {
-        type: "input",
-        name: "email",
-        message: "What is the engineer's email address?"
-      },
+        {
+            type: "input",
+            name: "id",
+            message: "What is the intern's employee ID number?" 
+        },
 
-      {
-        type: "input",
-        name: "github",
-        message: "What is the engineer's GitHub username?"
-      }
+        {
+            type: "input",
+            name: "email",
+            message: "What is the intern's email address?"
+        },
 
-    ]).then(answers => {
-      const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-      teamArray.push(engineer);
-      createTeam();
-    });
+        {
+            type: "input",
+            name: "school",
+            message: "What school does the intern attend?"
+        }
 
-  }
+        ]).then(answers => {
+        const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+        teamArray.push(intern);
+        createTeam();
+        });
 
+    }
 
 function htmlBuilder() {
     console.log("Team created!")
