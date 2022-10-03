@@ -1,20 +1,54 @@
 const inquirer = require('inquirer');
 const fs = require ('fs');
-const generateHTML = require('./src/generateHTML');
+const generateHTML = require('../generateHTML');
+const path = require('path');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const distPath = path.join(DIST_DIR, 'team.html');
-const path = require('path');
+const generateTeam = require('./src/template')
 
 //team profiles
 const Employee = require ('./lib/Employee');
 const Manager = require ('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const { createHistogram } = require('perf_hooks');
 
 const teamArray = [];
 
 
+function runApp () {
+
+    function createTeam () {
+        inquirer.prompt([{
+            type: "list",
+            name: "addEmployee",
+            message: "What type of employee would you like to add to your team?",
+            choices: [
+                "Manager",
+                "Engineer",
+                "Intern",
+                "No more team members are needed."
+            ]
+        }]).then (function (userInput) {
+            switch(userInput.addEmployee) {
+                case "Manager":
+                    addManager();
+                    break;
+                case "Engineer":
+                    addEngineer();
+                    break;
+                case "Intern":
+                    addIntern();
+                    break;    
+
+                default:
+                    htmlBuilder();    
+            }
+        })
+    }
 //Manager propmts
-const addManager = () => {
-    return inquirer.prompt ([
+function addManager() {
+    inquirer.prompt ([
         {
             type: 'input',
             name: 'name',
@@ -60,28 +94,21 @@ const addManager = () => {
             name: 'officeNumber',
             message: "Please enter the manager's office number",
         }
-    ]).then(managerInput => {
-        const {name, id, email, officeNumber} = managerInput;
-        const manager = new Manager (name, id, email, officeNumber);
-
+    ]).then(answers => {
+        const manager = new Manager (answers.name, answers.id, answers.email, answers.officeNumber);
         teamArray.push(manager);
-        writeFile()
-        console.log(teamArray);
-    })
+        createTeam();
+    });
 }
-var stringTeam = JSON.stringify(teamArray)
-console.log(stringTeam)
-const writeFile = HTML => {
-    fs.writeFile("./dist/index.html", stringTeam, err => {
-        if(err) {
-            console.log(err);
-            return;
-        } else {
-            //console.log(teamArray);
-            console.log("Your team profile has been successfully created!")
-            //console.log(fs.readFileSync("./dist/index.html", "UTF8"));
-        }
-    })
-};
 
-addManager()
+function htmlBuilder() {
+    console.log("Team created!")
+    fs.writeFileSync(distPath, generateTeam(teamArray), "UTF-8")
+}
+
+createTeam();
+}
+
+runApp();
+
+

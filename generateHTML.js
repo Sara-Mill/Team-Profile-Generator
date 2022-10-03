@@ -73,6 +73,6 @@ const generateTeamPage = function (employeeCards) {
   </html>
   `;
 }
-generateManager()
+//generateManager()
 generateTeamPage()
 module.exports = generateHTML
