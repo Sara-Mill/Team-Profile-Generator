@@ -1,12 +1,16 @@
 const inquirer = require('inquirer');
 const fs = require ('fs');
-const HTML = require('./generateHTML');
+const generateHTML = require('./src/generateHTML');
+const DIST_DIR = path.resolve(__dirname, 'dist');
+const distPath = path.join(DIST_DIR, 'team.html');
+const path = require('path');
 
 //team profiles
 const Employee = require ('./lib/Employee');
 const Manager = require ('./lib/Manager');
 
 const teamArray = [];
+
 
 //Manager propmts
 const addManager = () => {
@@ -62,7 +66,7 @@ const addManager = () => {
 
         teamArray.push(manager);
         writeFile()
-        console.log(manager);
+        console.log(teamArray);
     })
 }
 var stringTeam = JSON.stringify(teamArray)
@@ -73,9 +77,9 @@ const writeFile = HTML => {
             console.log(err);
             return;
         } else {
-            console.log(teamArray);
+            //console.log(teamArray);
             console.log("Your team profile has been successfully created!")
-            console.log(fs.readFileSync("Employee.HTML", "UTF8"));
+            //console.log(fs.readFileSync("./dist/index.html", "UTF8"));
         }
     })
 };
