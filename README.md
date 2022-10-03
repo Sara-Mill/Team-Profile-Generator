@@ -44,4 +44,5 @@
 
   If you have any questions or need to contact me about this app, I can be reached on Github or by email at [smilligan0183@gmail.com](smilligan0183@gmail.com)
 
+  ## Sample of webpage created using this app:
   ![Webpage with white background, red heading and blue and white cards showing employees' information](assets/Screenshot%20of%20Team%20Profile%20Webpage.png)
