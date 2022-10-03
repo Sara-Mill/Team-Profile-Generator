@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/Sara-Mill/Team-Profile-Generator#readme",
   "dependencies": {
-    "inquirer": "^9.1.2"
+    "inquirer": "^8.2.4"
   }
 }
