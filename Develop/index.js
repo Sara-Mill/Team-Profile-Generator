@@ -11,7 +11,6 @@ const Employee = require ('./lib/Employee');
 const Manager = require ('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const { createHistogram } = require('perf_hooks');
 
 const teamArray = [];
 
@@ -46,7 +45,7 @@ function runApp () {
             }
         })
     }
-//Manager propmts
+//Manager prompts
 function addManager() {
     inquirer.prompt ([
         {
@@ -100,6 +99,42 @@ function addManager() {
         createTeam();
     });
 }
+
+function addEngineer() {
+    inquirer.prompt([
+      
+      {
+        type: "input",
+        name: "name",
+        message: "What is the engineer's name?"
+      },
+
+      {
+        type: "input",
+        name: "id",
+        message: "What is the engineer's employee ID number?" 
+      },
+
+      {
+        type: "input",
+        name: "email",
+        message: "What is the engineer's email address?"
+      },
+
+      {
+        type: "input",
+        name: "github",
+        message: "What is the engineer's GitHub username?"
+      }
+
+    ]).then(answers => {
+      const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+      teamArray.push(engineer);
+      createTeam();
+    });
+
+  }
+
 
 function htmlBuilder() {
     console.log("Team created!")
