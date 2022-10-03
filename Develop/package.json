@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Sara-Mill/Team-Profile-Generator/issues"
   },
-  "homepage": "https://github.com/Sara-Mill/Team-Profile-Generator#readme"
+  "homepage": "https://github.com/Sara-Mill/Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^9.1.2"
+  }
 }
