@@ -2,6 +2,8 @@
   ## Team-Profile-Generator
   [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
   
+  A Link to the video description and to see the code run can be found here: https://www.youtube.com/watch?v=1K-zsUNDI1U
+  
   ## Table of Contents
   * [Description](#description)
   * [Usage](#usefaq)
